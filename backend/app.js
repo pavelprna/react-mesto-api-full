@@ -1,6 +1,6 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
@@ -13,7 +13,7 @@ const { PORT = 3000 } = process.env;
 
 const app = express();
 
-app.use(cors());
+app.options('*', cors());
 
 app.use(cookieParser());
 
@@ -32,8 +32,8 @@ app.post('/signup', userValidator, createUser);
 
 app.use(auth);
 
-app.use('/users', require('./routes/users'));
-app.use('/cards', require('./routes/cards'));
+app.use('/users', cors(), require('./routes/users'));
+app.use('/cards', cors(), require('./routes/cards'));
 
 app.use('*', (req, res) => {
   res.status(404).send({ message: 'Ресурс не найден' });
