@@ -13,9 +13,7 @@ const { PORT = 3000 } = process.env;
 
 const app = express();
 
-app.use(cors({
-  origin: 'https://mesto.prna.nomoredomains.club',
-}));
+app.use(cors());
 
 app.use(cookieParser());
 
