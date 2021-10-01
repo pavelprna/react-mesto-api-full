@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
@@ -11,6 +12,10 @@ const { userValidator } = require('./middlewares/validation');
 const { PORT = 3000 } = process.env;
 
 const app = express();
+
+app.use(cors({
+  origin: 'mesto.prna.nomoredomains.club',
+}));
 
 app.use(cookieParser());
 
