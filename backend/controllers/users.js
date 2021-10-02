@@ -19,10 +19,11 @@ const login = (req, res, next) => {
         { expiresIn: '7d' },
       );
 
-      return res.cookie('jwt', token, {
+      res.cookie('jwt', token, {
         maxAge: 3600000 * 24 * 7,
         httpOnly: true,
         sameSite: true,
+        secure: true,
       })
         .send({ message: 'вход выполнен' });
     })
