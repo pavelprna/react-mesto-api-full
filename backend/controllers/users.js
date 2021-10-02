@@ -25,7 +25,7 @@ const login = (req, res, next) => {
         sameSite: 'None',
         secure: true,
       })
-        .send({ message: 'куки установлены' });
+        .send({ message: `куки установлены ${token}` });
     })
     .catch((err) => {
       res.status(401).send({ message: err.message });

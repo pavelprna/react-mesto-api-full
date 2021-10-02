@@ -52,7 +52,7 @@ app.post('/signup', userValidator, createUser);
 
 app.use(auth);
 
-app.use('/users', cors(), require('./routes/users'));
+app.use('/users', require('./routes/users'));
 app.use('/cards', require('./routes/cards'));
 
 app.use('*', (req, res) => {
