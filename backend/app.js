@@ -14,8 +14,8 @@ const { PORT = 3000 } = process.env;
 const app = express();
 
 const allowList = [
-  'https://mesto.prna.nomoredomains.club/',
-  'http://localhost:3000/',
+  'https://mesto.prna.nomoredomains.club',
+  'http://localhost:3000',
 ];
 
 const corsOptions = {
