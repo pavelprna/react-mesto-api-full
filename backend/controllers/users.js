@@ -22,7 +22,6 @@ const login = (req, res, next) => {
       return res.cookie('jwt', token, {
         maxAge: 3600000 * 24 * 7,
         httpOnly: true,
-        sameSite: true,
       })
         .send({ message: 'куки установлены' });
     })
