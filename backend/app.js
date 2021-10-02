@@ -13,7 +13,26 @@ const { PORT = 3000 } = process.env;
 
 const app = express();
 
-app.use(cors());
+const allowList = [
+  'https://mesto.prna.nomoredomains.club/',
+  'http://localhost:3000/',
+];
+
+const corsOptions = {
+  origin(origin, callback) {
+    if (allowList.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH', 'HEAD'],
+  allowedHeaders: ['Authorization', 'Content-Type', 'Accept'],
+  credentials: true,
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 
 app.options('*', cors());
 
