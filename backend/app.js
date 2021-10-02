@@ -13,9 +13,9 @@ const { PORT = 3000 } = process.env;
 
 const app = express();
 
-app.use(cors({
-  origin: 'https://mesto.prna.nomoredomains.club/',
-}));
+app.use(cors());
+
+app.options('*', cors());
 
 app.use(cookieParser());
 
@@ -28,13 +28,12 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   // useFindAndModify: false
 });
 
-
 app.post('/signin', userValidator, login);
 app.post('/signup', userValidator, createUser);
 
 app.use(auth);
 
-app.use('/users', require('./routes/users'));
+app.use('/users', cors(), require('./routes/users'));
 app.use('/cards', require('./routes/cards'));
 
 app.use('*', (req, res) => {
