@@ -19,12 +19,12 @@ const login = (req, res, next) => {
         { expiresIn: '7d' },
       );
 
-      res.cookie('jwt', token, {
+      return res.cookie('jwt', token, {
         maxAge: 3600000 * 24 * 7,
         httpOnly: true,
         sameSite: true,
       })
-        .end();
+        .send({ message: 'куки установлены' });
     })
     .catch((err) => {
       res.status(401).send({ message: err.message });
