@@ -28,8 +28,8 @@ const corsOptions = {
   },
   methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH', 'HEAD'],
   allowedHeaders: ['Authorization', 'Content-Type', 'Accept'],
-  credentials: true,
   optionsSuccessStatus: 200,
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
