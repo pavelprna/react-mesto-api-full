@@ -47,7 +47,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   // useFindAndModify: false
 });
 
-app.use(requestLogger);
+// app.use(requestLogger);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
