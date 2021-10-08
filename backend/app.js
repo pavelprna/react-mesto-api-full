@@ -15,7 +15,8 @@ const { PORT = 3000 } = process.env;
 const app = express();
 
 const allowList = [
-  'https://mesto.prna.nomoredomains.club/',
+  'https://mesto.prna.nomoredomains.club',
+  'http://mesto.prna.nomoredomains.club',
   'http://localhost:3000',
 ];
 
@@ -47,7 +48,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   // useFindAndModify: false
 });
 
-// app.use(requestLogger);
+app.use(requestLogger);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
