@@ -18,6 +18,7 @@ const app = express();
 const allowList = [
   'https://mesto.prna.nomoredomains.club',
   'http://mesto.prna.nomoredomains.club',
+  'https://api.mesto.prna.nomoredomains.club',
   'http://localhost:3000',
 ];
 
@@ -42,13 +43,14 @@ app.options('*', cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(requestLogger);
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
   // useCreateIndex: true,
   // useFindAndModify: false
 });
+
+app.use(requestLogger);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
