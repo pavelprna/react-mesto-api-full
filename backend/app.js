@@ -16,6 +16,8 @@ const { PORT = 3000 } = process.env;
 
 const app = express();
 
+app.use(requestLogger);
+
 const allowList = [
   'https://mesto.prna.nomoredomains.club',
   'http://mesto.prna.nomoredomains.club',
@@ -37,21 +39,9 @@ const corsOptions = {
   credentials: true,
 };
 
-app.use(cors({
-  origin(origin, callback) {
-    if (allowList.includes(origin) || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH', 'HEAD'],
-  allowedHeaders: ['Authorization', 'Content-Type', 'Accept'],
-  optionsSuccessStatus: 200,
-  credentials: true,
-}));
-
+app.use(cors(corsOptions));
 app.options('*', cors());
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -63,7 +53,6 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   // useFindAndModify: false
 });
 
-app.use(requestLogger);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
