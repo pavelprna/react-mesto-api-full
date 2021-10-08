@@ -8,7 +8,7 @@ const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const error = require('./middlewares/error');
 const { userValidator } = require('./middlewares/validation');
-const { requestLogger, errorLogger } = require('./middlewares/logger');
+// const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
 
@@ -48,7 +48,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   // useFindAndModify: false
 });
 
-app.use(requestLogger);
+// app.use(requestLogger);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
@@ -68,7 +68,7 @@ app.use('*', (req, res) => {
   res.status(404).send({ message: 'Ресурс не найден' });
 });
 
-app.use(errorLogger);
+// app.use(errorLogger);
 
 app.use(errors());
 app.use(error);
