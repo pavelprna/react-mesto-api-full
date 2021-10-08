@@ -37,9 +37,21 @@ const corsOptions = {
   credentials: true,
 };
 
-app.use(cors(corsOptions));
+app.use(cors({
+  origin(origin, callback) {
+    if (allowList.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH', 'HEAD'],
+  allowedHeaders: ['Authorization', 'Content-Type', 'Accept'],
+  optionsSuccessStatus: 200,
+  credentials: true,
+}));
 
-app.options('*', cors(corsOptions));
+app.options('*', cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
