@@ -27,6 +27,8 @@ const corsOptions = {
   origin(origin, callback) {
     if (allowList.indexOf(origin) !== -1) {
       callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
     }
   },
   methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH', 'HEAD'],
@@ -35,9 +37,8 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 };
 
-app.use(cors(corsOptions));
-
 app.options('*', cors());
+app.use(cors(corsOptions));
 
 app.use(helmet());
 app.use(bodyParser.json());
