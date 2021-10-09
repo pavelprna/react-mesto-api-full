@@ -35,7 +35,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.options('*', cors());
+// app.options('*', cors());
 
 app.use(helmet());
 app.use(bodyParser.json());
