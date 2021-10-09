@@ -71,7 +71,7 @@ app.use('*', () => {
   throw new NotFoundError({ message: 'Ресурс не найден' });
 });
 
-app.use(errorLogger);
+// app.use(errorLogger);
 app.use(errors());
 app.use(error);
 
