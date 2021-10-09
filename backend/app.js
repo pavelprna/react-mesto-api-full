@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const helmet = require('helmet');
 const cors = require('cors');
-const { login, createUser } = require('./controllers/users');
+const { login, createUser, logout } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const error = require('./middlewares/error');
 const { userValidator } = require('./middlewares/validation');
@@ -59,6 +59,7 @@ app.get('/crash-test', () => {
 
 app.post('/signin', userValidator, login);
 app.post('/signup', userValidator, createUser);
+app.delete('/logout', logout);
 
 app.use(auth);
 

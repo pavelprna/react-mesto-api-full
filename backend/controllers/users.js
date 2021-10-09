@@ -33,6 +33,11 @@ const login = (req, res, next) => {
     .catch(next);
 };
 
+const logout = (req, res, next) => {
+  res.clearCookie('jwt').send({ message: 'Успешный выход' });
+  next();
+};
+
 const getUsers = (req, res, next) => {
   User.find({})
     .then((users) => res.send({ data: users }))
@@ -143,6 +148,7 @@ const updateAvatar = (req, res, next) => {
 
 module.exports = {
   login,
+  logout,
   getUsers,
   getUser,
   getCurrentUser,
