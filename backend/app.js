@@ -40,7 +40,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.options('*', cors());
+app.options(corsOptions, cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
