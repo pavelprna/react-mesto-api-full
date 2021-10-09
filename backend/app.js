@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
+const helmet = require('helmet');
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const error = require('./middlewares/error');
@@ -42,7 +43,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.options('*', cors());
 
-
+app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -52,7 +53,6 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   // useCreateIndex: true,
   // useFindAndModify: false
 });
-
 
 app.get('/crash-test', () => {
   setTimeout(() => {
