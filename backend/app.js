@@ -30,12 +30,15 @@ const corsOptions = {
       callback(null, true);
     }
   },
+  methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH', 'HEAD'],
+  allowedHeaders: ['Authorization', 'Content-Type', 'Accept'],
   credentials: true,
+  optionsSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
 
-// app.options('*', cors());
+app.options('*', cors(corsOptions));
 
 app.use(helmet());
 app.use(bodyParser.json());
@@ -48,7 +51,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   // useFindAndModify: false
 });
 
-// app.use(requestLogger);
+app.use(requestLogger);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
@@ -68,7 +71,7 @@ app.use('*', () => {
   throw new NotFoundError({ message: 'Ресурс не найден' });
 });
 
-// app.use(errorLogger);
+app.use(errorLogger);
 app.use(errors());
 app.use(error);
 
