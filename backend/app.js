@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
-const helmet = require('helmet');
+
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const error = require('./middlewares/error');
@@ -22,16 +22,13 @@ app.use(requestLogger);
 const allowList = [
   'https://mesto.prna.nomoredomains.club',
   'http://mesto.prna.nomoredomains.club',
-  'https://api.mesto.prna.nomoredomains.club',
   'http://localhost:3000',
 ];
 
 const corsOptions = {
   origin(origin, callback) {
-    if (allowList.includes(origin) || !origin) {
+    if (allowList.indexOf(origin) !== -1) {
       callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
     }
   },
   methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH', 'HEAD'],
@@ -43,7 +40,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 // app.options('*', cors());
 
-app.use(helmet());
+// app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
