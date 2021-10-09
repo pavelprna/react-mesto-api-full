@@ -40,8 +40,9 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.options(corsOptions, cors());
+app.options('*', cors());
 
+app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -72,7 +73,6 @@ app.use('*', () => {
   throw new NotFoundError({ message: 'Ресурс не найден' });
 });
 
-app.use(helmet());
 app.use(errorLogger);
 app.use(errors());
 app.use(error);
