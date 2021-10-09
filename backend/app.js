@@ -10,7 +10,7 @@ const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const error = require('./middlewares/error');
 const { userValidator } = require('./middlewares/validation');
-const { requestLogger, errorLogger } = require('./middlewares/logger');
+// const { requestLogger, errorLogger } = require('./middlewares/logger');
 const NotFoundError = require('./errors/not-found-error');
 
 const { PORT = 3000 } = process.env;
@@ -26,15 +26,10 @@ const allowList = [
 
 const corsOptions = {
   origin(origin, callback) {
-    if (allowList.includes(origin) || !origin) {
+    if (allowList.indexOf(origin) !== -1) {
       callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
     }
   },
-  methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'],
-  allowedHeaders: ['Authorization', 'Content-Type', 'Accept'],
-  optionsSuccessStatus: 200,
   credentials: true,
 };
 
@@ -53,7 +48,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   // useFindAndModify: false
 });
 
-app.use(requestLogger);
+// app.use(requestLogger);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
@@ -73,7 +68,7 @@ app.use('*', () => {
   throw new NotFoundError({ message: 'Ресурс не найден' });
 });
 
-app.use(errorLogger);
+// app.use(errorLogger);
 app.use(errors());
 app.use(error);
 
