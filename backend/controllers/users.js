@@ -102,7 +102,7 @@ const createUser = (req, res, next) => {
 const updateUser = (req, res, next) => {
   const { name, about } = req.body;
 
-  User.findByIdAndUpdate({ _id: req.user._id }, { name, about })
+  User.findByIdAndUpdate({ _id: req.user._id }, { name, about }, { new: true })
     .then((user) => {
       if (user) {
         res.send({ user });
