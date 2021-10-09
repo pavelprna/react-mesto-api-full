@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -10,7 +9,7 @@ const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const error = require('./middlewares/error');
 const { userValidator } = require('./middlewares/validation');
-// const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 const NotFoundError = require('./errors/not-found-error');
 
 const { PORT = 3000 } = process.env;
@@ -20,6 +19,7 @@ const app = express();
 const allowList = [
   'https://mesto.prna.nomoredomains.club',
   'http://mesto.prna.nomoredomains.club',
+  'https://api.mesto.prna.nomoredomains.club',
   'http://localhost:3000',
 ];
 
@@ -38,9 +38,9 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
 app.options('*', cors());
 
-app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -51,7 +51,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   // useFindAndModify: false
 });
 
-// app.use(requestLogger);
+app.use(requestLogger);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
@@ -71,7 +71,8 @@ app.use('*', () => {
   throw new NotFoundError({ message: 'Ресурс не найден' });
 });
 
-// app.use(errorLogger);
+app.use(helmet());
+app.use(errorLogger);
 app.use(errors());
 app.use(error);
 
