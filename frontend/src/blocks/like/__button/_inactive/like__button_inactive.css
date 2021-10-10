@@ -1,0 +1,4 @@
+.like__button_inactive {
+    background-image: url(../../../../images/logo/elements-like-disabled.svg);
+    opacity: 1;
+}

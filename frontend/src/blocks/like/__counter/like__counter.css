@@ -1,0 +1,9 @@
+.like__counter {
+  color: #000;
+  display: block;
+  max-width: 22px;
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.23;
+  padding-top: 3px;
+}

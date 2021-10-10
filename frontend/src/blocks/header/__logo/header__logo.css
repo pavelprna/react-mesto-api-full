@@ -1,0 +1,11 @@
+.header__logo {
+  width: 104px;
+  object-fit: contain;
+  display: block;
+}
+
+@media (min-width: 918px) {
+  .header__logo {
+    width: 142px;
+  }
+}

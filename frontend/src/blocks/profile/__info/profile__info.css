@@ -1,0 +1,12 @@
+.profile__info {
+  display: grid;
+  grid-template-columns: 18px [profile-info-title] auto 18px;
+  column-gap: 10px;
+}
+
+@media (min-width: 768px) {
+  .profile__info {
+    grid-template-columns: 12px [profile-info-title] 1fr min-content;
+    column-gap: 18px;
+  }
+}

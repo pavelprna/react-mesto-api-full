@@ -1,0 +1,17 @@
+.popup__close {
+  background: url(../../../images/logo/popup-close.svg) center / 22px 22px no-repeat;
+  border: none;
+  width: 36px;
+  height: 36px;
+  position: absolute;
+  top: -50px;
+  right: 0;
+}
+
+@media (min-width: 768px) {
+  .popup__close {
+    background-size: 34px 34px;
+    top: -38px;
+    right: -38px;
+  }
+}

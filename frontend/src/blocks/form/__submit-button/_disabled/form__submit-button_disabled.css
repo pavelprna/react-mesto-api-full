@@ -1,0 +1,11 @@
+.form__submit-button_disabled {
+  color: rgba(0, 0, 0, .2);
+  border: 1px solid rgba(0, 0, 0, .2);
+  background: none;
+  cursor: default;
+}
+
+.form__submit-button_disabled:hover {
+  background: none;
+  opacity: 1;
+}

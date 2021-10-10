@@ -1,0 +1,15 @@
+.form__input {
+  display: block;
+  padding: 10px 0;
+  width: 100%;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.21;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  border-radius: 0;
+}
+
+.form__input:focus {
+  outline: none;
+}

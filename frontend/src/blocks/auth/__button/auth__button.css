@@ -1,0 +1,16 @@
+.auth__button {
+  background: #fff;
+  color: #000;
+  font-size: 16px;
+  line-height: 1.22;
+}
+
+.auth__button:hover {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+@media (min-width: 768px) {
+  .auth__button {
+    font-size: 18px;
+  }
+}

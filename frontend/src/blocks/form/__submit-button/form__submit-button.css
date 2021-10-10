@@ -1,0 +1,24 @@
+.form__submit-button {
+  color: #fff;
+  background: rgba(0, 0, 0, 1);
+  border: none;
+  border-radius: 2px;
+  margin: 45px 0 0;
+  display: block;
+  width: 100%;
+  height: 46px;
+  font-size: 14px;
+  line-height: 1.21;
+}
+
+.form__submit-button:hover {
+  background: rgba(0, 0, 0, .8);
+}
+
+@media (min-width: 768px) {
+  .form__submit-button {
+    margin: 48px 0 0;
+    font-size: 18px;
+    height: 50px;
+  }
+}
