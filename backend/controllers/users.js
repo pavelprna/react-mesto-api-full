@@ -34,7 +34,7 @@ const login = (req, res, next) => {
 };
 
 const logout = (req, res, next) => {
-  // res.clearCookie('jwt').send({ message: 'Успешный выход' });
+  res.clearCookie('jwt').send({ message: 'Успешный выход' });
   next();
 };
 
