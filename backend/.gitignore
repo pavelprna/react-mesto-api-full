@@ -13,3 +13,7 @@ node_modules
 .DS_Store
 .idea
 .vscode
+
+# locks
+package-lock.json
+yarn.lock

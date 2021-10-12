@@ -15,9 +15,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && scp -r ./build/* prna@62.84.120.83:react-mesto-api-full/frontend"
+    "deploy": "npm run build && scp -r ./build/* prna@62.84.120.83:react-mesto-api-full/frontend/build"
   },
   "eslintConfig": {
     "extends": [
