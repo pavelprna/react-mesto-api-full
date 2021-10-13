@@ -24,11 +24,20 @@ const cardIdValidator = celebrate({
   }),
 });
 
-const userValidator = celebrate({
+const userSignInValidator = celebrate({
   body: Joi.object().keys({
     email: Joi.string().email().required(),
-    password: Joi.string().min(4).required(),
+    password: Joi.string().required(),
+  }),
+});
+
+const userSignUpValidator = celebrate({
+  body: Joi.object().keys({
+    email: Joi.string().email().required(),
+    password: Joi.string().required(),
     avatar: Joi.string().custom(isUrlValidator),
+    name: Joi.string(),
+    about: Joi.string(),
   }),
 });
 
@@ -54,7 +63,8 @@ const userAvatarValidator = celebrate({
 module.exports = {
   createCardValidator,
   cardIdValidator,
-  userValidator,
+  userSignUpValidator,
+  userSignInValidator,
   userIdValidator,
   userAvatarValidator,
   userInfoValidator,

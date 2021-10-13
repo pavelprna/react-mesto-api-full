@@ -9,7 +9,7 @@ const cors = require('cors');
 const { login, createUser, logout } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const error = require('./middlewares/error');
-const { userValidator } = require('./middlewares/validation');
+const { userSignInValidator, userSignUpValidator } = require('./middlewares/validation');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const NotFoundError = require('./errors/not-found-error');
 
@@ -57,8 +57,8 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.post('/signin', userValidator, login);
-app.post('/signup', userValidator, createUser);
+app.post('/signin', userSignInValidator, login);
+app.post('/signup', userSignUpValidator, createUser);
 app.delete('/logout', logout);
 
 app.use(auth);
@@ -67,7 +67,7 @@ app.use('/users', require('./routes/users'));
 app.use('/cards', require('./routes/cards'));
 
 app.use('*', () => {
-  throw new NotFoundError({ message: 'Ресурс не найден' });
+  throw new NotFoundError('Ресурс не найден');
 });
 
 app.use(errorLogger);
