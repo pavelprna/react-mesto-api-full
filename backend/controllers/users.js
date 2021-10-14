@@ -91,8 +91,15 @@ const createUser = (req, res, next) => {
     .then((hash) => User.create({
       name, about, avatar, email, password: hash,
     })
-      // eslint-disable-next-line no-shadow
-      .then(({ password, ...user }) => res.send({ user }))
+      .then((user) => {
+        const {
+          // eslint-disable-next-line no-shadow
+          name, email, about, avatar,
+        } = user;
+        res.send({
+          name, email, about, avatar,
+        });
+      })
       .catch((error) => {
         if (error.name === 'ValidationError') {
           throw new BadRequerstError('Переданы некорректные данные при создании пользователя');

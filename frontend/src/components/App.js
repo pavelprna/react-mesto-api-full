@@ -35,7 +35,6 @@ function App() {
   const history = useHistory();
 
   useEffect(() => {
-    if (isLogined) {
       auth.checkToken()
         .then((res) => {
           Promise.all([api.getUser(), api.getInitialCards()])
@@ -43,14 +42,17 @@ function App() {
               setCurrentUser(user.user);
               setCards(cards);
               setIsLogined(true);
+              history.push('/')
             })
-            .catch((err) => console.log(err))
+            .catch((err) => {
+              setIsLogined(false)
+              // console.log(err)
+            })
             .finally(() => setIsLoaded(true));
         })
         .catch((err) => console.log(err));
 
       // eslint-disable-next-line
-    }
   }, [isLogined]);
 
   useEffect(() => {
