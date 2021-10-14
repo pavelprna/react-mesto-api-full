@@ -94,10 +94,10 @@ const createUser = (req, res, next) => {
       .then((user) => {
         const {
           // eslint-disable-next-line no-shadow
-          name, email, about, avatar,
+          name, email, about, avatar, _id,
         } = user;
         res.send({
-          name, email, about, avatar,
+          name, email, about, avatar, _id,
         });
       })
       .catch((error) => {

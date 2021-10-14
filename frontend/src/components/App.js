@@ -35,24 +35,24 @@ function App() {
   const history = useHistory();
 
   useEffect(() => {
-      auth.checkToken()
-        .then((res) => {
-          Promise.all([api.getUser(), api.getInitialCards()])
-            .then(([user, cards]) => {
-              setCurrentUser(user.user);
-              setCards(cards);
-              setIsLogined(true);
-              history.push('/')
-            })
-            .catch((err) => {
-              setIsLogined(false)
-              // console.log(err)
-            })
-            .finally(() => setIsLoaded(true));
-        })
-        .catch((err) => console.log(err));
+    auth.checkToken()
+      .then((res) => {
+        Promise.all([api.getUser(), api.getInitialCards()])
+          .then(([user, cards]) => {
+            setCurrentUser(user.user);
+            setCards(cards);
+            setIsLogined(true);
+            history.push('/')
+          })
+          .catch((err) => {
+            setIsLogined(false)
+            // console.log(err)
+          })
+          .finally(() => setIsLoaded(true));
+      })
+      .catch((err) => console.log(err));
 
-      // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [isLogined]);
 
   useEffect(() => {
@@ -161,15 +161,16 @@ function App() {
 
   const handleSignUp = (userData) => {
     auth.signUp(userData)
-      .then((json) => {
-        if (json?.user) {
-          setUserEmail(json.user.email);
+      .then((user) => {
+        if (user) {
+          setUserEmail(user.email);
           setTooltipData({
             icon: tooltipIconOk,
             message: "Вы успешно зарегистрировались!",
           });
           setIsTooltipOpen(true);
-          setIsLogined(true)
+          setIsLogined(true);
+          setIsLoaded(true);
         }
       })
       .then(() => history.push('/'))
